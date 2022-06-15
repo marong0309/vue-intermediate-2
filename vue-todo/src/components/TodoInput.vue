@@ -1,9 +1,9 @@
 <template>
   <div class="inputBox shadow">
-    <input type="text" v-model="newTodoItem" />
+    <input type="text" v-model="newTodoItem" @keyup.enter="addTodo" />
     <!-- <button @click="addTodo" class="addBtn">add</button> -->
     <span class="addContainer" @click="addTodo">
-      <i class="fas fa-plus addBtn"></i>
+      <font-awesome-icon icon="fas fa-plus" class="addBtn" />
     </span>
   </div>
 </template>
@@ -48,10 +48,11 @@ input:focus {
   background: linear-gradient(to right, #6478fb, #8763fb);
   display: block;
   width: 3rem;
+  height: 100%;
   border-radius: 0 5px 5px 0;
 }
 .addBtn {
   color: white;
-  vertical-align: middle;
+  vertical-align: middle;  
 }
 </style>
