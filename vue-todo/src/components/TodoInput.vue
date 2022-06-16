@@ -4,15 +4,28 @@
     <!-- <button @click="addTodo" class="addBtn">add</button> -->
     <span class="addContainer" @click="addTodo">
       <font-awesome-icon icon="fas fa-plus" class="addBtn" />
-    </span>
+    </span>   
+      <AlertModal v-if="showModal" @close="showModal = false">       
+        <h3 slot="header" class="modalHeaderWrap">경고!
+          <font-awesome-icon icon="fas fa-times" class="closeModalBtn" @click="showModal = false" />
+        </h3>
+        <p slot="body">텍스트를 입력해주세요</p>
+        <div slot="footer">
+          <i class="footerText">copyright Vue</i>
+          <button @click="showModal = false">닫기</button>
+          </div>
+      </AlertModal>    
   </div>
 </template>
 
 <script>
+import AlertModal from './common/AlertModal.vue'
+
 export default {
   data() {
     return {
       newTodoItem: "",
+      showModal: false
     };
   },
   methods: {
@@ -20,12 +33,17 @@ export default {
       if (this.newTodoItem !== "") {
         this.$emit("addTodoItem", this.newTodoItem);
         this.clearInput();
+      } else {
+        this.showModal = !this.showModal;
       }
     },
     clearInput: function () {
       this.newTodoItem = "";
     },
   },
+  components:{
+    AlertModal: AlertModal,
+  }
 };
 </script>
 
@@ -55,5 +73,19 @@ input:focus {
 .addBtn {
   color: white;
   vertical-align: middle;
+}
+.modalHeaderWrap{
+  width: 100%;
+  overflow: hidden;
+}
+.closeModalBtn{
+  color: rgb(160, 160, 160);  
+  cursor: pointer;  
+  float: right; 
+  vertical-align: middle;
+  margin-top: 11px; 
+}
+.footerText{
+  display: block;
 }
 </style>

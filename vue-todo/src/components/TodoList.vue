@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul>
+    <transition-group name="list" tag="ul">    
       <li
         v-for="(todoItem, index) in propsdata"
         :key="todoItem.item"
@@ -21,8 +21,8 @@
           <font-awesome-icon icon="fas fa-trash-alt" />
         </span>
         <!-- <button @click="removeItem"></button> -->
-      </li>
-    </ul>
+      </li>    
+    </transition-group>
   </div>
 </template>
 
@@ -74,5 +74,12 @@ li {
 .removeBtn {
   margin-left: auto;
   color: #de4343;
+}
+.list-enter-active, .list-leave-active {
+  transition: all 0.5s;
+}
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 </style>
