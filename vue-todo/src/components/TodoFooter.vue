@@ -27,6 +27,17 @@ export default {
   background-color: white;
   border-radius: 5px;
   margin: 0 auto;
+  cursor: pointer;
+}
+.clearAllContainer:hover {
+  background-color: rgb(194, 43, 43);
+  transition: all 0.3s ease-in-out;
+  border-radius: inherit;
+  border-radius: 5px;
+}
+.clearAllBtn:hover {
+  color: white;
+  transition: all 0.3s ease-in-out;
 }
 .clearAllBtn {
   color: #e20303;
