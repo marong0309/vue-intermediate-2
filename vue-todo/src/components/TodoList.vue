@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li
-        v-for="(todoItem, index) in todoItems"
+        v-for="(todoItem, index) in propsdata"
         :key="todoItem.item"
         class="shadow"
       >
@@ -28,30 +28,13 @@
 
 <script>
 export default {
-  data: function () {
-    return {
-      todoItems: [],
-    };
-  },
-  created: function () {
-    if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-          // this.todoItems.push(localStorage.key(i));
-          // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));s
-          this.todoItems.push(
-            JSON.parse(localStorage.getItem(localStorage.key(i)))
-          );
-        }
-      }
-    }
-  },
+  props: ["propsdata"],
   methods: {
     removeTodo: function (todoItem, index) {
       // localStorage 영역만 지운다고 되는게 아니라
       localStorage.removeItem(todoItem);
       // 화면 영역에서도 지워줘야 한다.
-      this.todoItems.splice(index, 1);
+      this.propsdata.splice(index, 1);
       // slice()는 기존배열을 변경하지않고 지움 그래서 splice() API를 씀
     },
     toggleComplete: function (todoItem, index) {
