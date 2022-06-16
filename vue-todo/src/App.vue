@@ -2,7 +2,11 @@
   <div id="app">
     <TodoHeader />
     <TodoInput @addTodoItem="addOneItem" />
-    <TodoList :propsdata="todoItems" />
+    <TodoList
+      :propsdata="todoItems"
+      @removeItem="removeOneItem"
+      @toggleItem="toggleOneItem"
+    />
     <TodoFooter />
   </div>
 </template>
@@ -44,6 +48,16 @@ export default {
       var obj = { completed: false, item: todoItem };
       localStorage.setItem(todoItem, JSON.stringify(obj));
       this.todoItems.push(obj);
+    },
+    removeOneItem: function (todoItem, index) {
+      localStorage.removeItem(todoItem.item);
+      this.todoItems.splice(index, 1);
+    },
+    toggleOneItem: function (todoItem, index) {
+      // App.vue 컴포넌트 내에서 수정하도록 메서드 구성
+      this.todoItems[index].completed = !this.todoItems[index].completed;
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
   },
 };

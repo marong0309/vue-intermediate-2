@@ -12,7 +12,7 @@
           :class="{
             checkBtnCompleted: todoItem.completed,
           }"
-          @click="toggleComplete(todoItem, indedx)"
+          @click="toggleComplete(todoItem, index)"
         />
         <span :class="{ textCompleted: todoItem.completed }">{{
           todoItem.item
@@ -31,17 +31,10 @@ export default {
   props: ["propsdata"],
   methods: {
     removeTodo: function (todoItem, index) {
-      // localStorage 영역만 지운다고 되는게 아니라
-      localStorage.removeItem(todoItem);
-      // 화면 영역에서도 지워줘야 한다.
-      this.propsdata.splice(index, 1);
-      // slice()는 기존배열을 변경하지않고 지움 그래서 splice() API를 씀
+      this.$emit("removeItem", todoItem, index);
     },
     toggleComplete: function (todoItem, index) {
-      todoItem.completed = !todoItem.completed;
-      // 로컬 스토리지의 값을 갱신
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+      this.$emit("toggleItem", todoItem, index);
     },
   },
 };
