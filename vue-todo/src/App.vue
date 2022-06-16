@@ -7,7 +7,7 @@
       @removeItem="removeOneItem"
       @toggleItem="toggleOneItem"
     />
-    <TodoFooter />
+    <TodoFooter @clearAll="clearAllItem" />
   </div>
 </template>
 <!-- v-on:하위 컴포넌트에서 발생시킨 이벤트 이름 = "현재 컴포넌트에서 발생시킨 이벤트" -->
@@ -20,17 +20,6 @@ import TodoList from "./components/TodoList.vue";
 import TodoFooter from "./components/TodoFooter.vue";
 
 export default {
-  created: function () {
-    if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-          this.todoItems.push(
-            JSON.parse(localStorage.getItem(localStorage.key(i)))
-          );
-        }
-      }
-    }
-  },
   data: function () {
     return {
       todoItems: [],
@@ -59,6 +48,25 @@ export default {
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
+    clearAllItem: function () {
+      // 내 생각
+      // this.todoItems.splice(0, this.todoItems.length);
+      // 캡틴판교 생각
+      // 복잡하게 생각할 것 없이 빈배열로 만들어주면 됨
+      this.todoItems = [];
+      localStorage.clear();
+    },
+  },
+  created: function () {
+    if (localStorage.length > 0) {
+      for (var i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
+          this.todoItems.push(
+            JSON.parse(localStorage.getItem(localStorage.key(i)))
+          );
+        }
+      }
+    }
   },
 };
 </script>
