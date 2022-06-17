@@ -6,13 +6,13 @@
 
 <script>
 export default {
-  data: function () {
+  data() {
     return {
       activeBtn: false,
     };
   },
   methods: {
-    clearTodo: function () {
+    clearTodo() {
       this.$emit("clearAll");
     },
   },

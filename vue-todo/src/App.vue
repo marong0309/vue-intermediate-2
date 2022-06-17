@@ -20,7 +20,7 @@ import TodoList from "./components/TodoList.vue";
 import TodoFooter from "./components/TodoFooter.vue";
 
 export default {
-  data: function () {
+  data() {
     return {
       todoItems: [],
     };
@@ -33,22 +33,22 @@ export default {
     TodoFooter,
   },
   methods: {
-    addOneItem: function (todoItem) {
+    addOneItem(todoItem) {
       const obj = { completed: false, item: todoItem };
       localStorage.setItem(todoItem, JSON.stringify(obj));
       this.todoItems.push(obj);
     },
-    removeOneItem: function (todoItem, index) {
+    removeOneItem(todoItem, index) {
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1);
     },
-    toggleOneItem: function (todoItem, index) {
+    toggleOneItem(todoItem, index) {
       // App.vue 컴포넌트 내에서 수정하도록 메서드 구성
       this.todoItems[index].completed = !this.todoItems[index].completed;
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
-    clearAllItem: function () {
+    clearAllItem() {
       // 내 생각
       // this.todoItems.splice(0, this.todoItems.length);
       // 캡틴판교 생각
@@ -57,7 +57,7 @@ export default {
       localStorage.clear();
     },
   },
-  created: function () {
+  created() {
     if (localStorage.length > 0) {
       // 반복문은 let으로 값을 바꿔서 쓰니까
       for (let i = 0; i < localStorage.length; i++) {

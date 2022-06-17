@@ -1,6 +1,6 @@
 <template>
   <div>
-    <transition-group name="list" tag="ul">    
+    <transition-group name="list" tag="ul">
       <li
         v-for="(todoItem, index) in propsdata"
         :key="todoItem.item"
@@ -21,7 +21,7 @@
           <font-awesome-icon icon="fas fa-trash-alt" />
         </span>
         <!-- <button @click="removeItem"></button> -->
-      </li>    
+      </li>
     </transition-group>
   </div>
 </template>
@@ -30,10 +30,10 @@
 export default {
   props: ["propsdata"],
   methods: {
-    removeTodo: function (todoItem, index) {
+    removeTodo(todoItem, index) {
       this.$emit("removeItem", todoItem, index);
     },
-    toggleComplete: function (todoItem, index) {
+    toggleComplete(todoItem, index) {
       this.$emit("toggleItem", todoItem, index);
     },
   },
@@ -75,10 +75,12 @@ li {
   margin-left: auto;
   color: #de4343;
 }
-.list-enter-active, .list-leave-active {
+.list-enter-active,
+.list-leave-active {
   transition: all 0.5s;
 }
-.list-enter, .list-leave-to {
+.list-enter,
+.list-leave-to {
   opacity: 0;
   transform: translateY(-10px);
 }
