@@ -1,12 +1,8 @@
 <template>
   <div id="app">
     <TodoHeader />
-    <TodoInput @addTodoItem="addOneItem" />
-    <TodoList
-      :propsdata="todoItems"
-      @removeItem="removeOneItem"
-      @toggleItem="toggleOneItem"
-    />
+    <TodoInput />
+    <TodoList />
     <TodoFooter @clearAll="clearAllItem" />
   </div>
 </template>
@@ -31,43 +27,6 @@ export default {
     TodoInput,
     TodoList,
     TodoFooter,
-  },
-  methods: {
-    addOneItem(todoItem) {
-      const obj = { completed: false, item: todoItem };
-      localStorage.setItem(todoItem, JSON.stringify(obj));
-      this.todoItems.push(obj);
-    },
-    removeOneItem(todoItem, index) {
-      localStorage.removeItem(todoItem.item);
-      this.todoItems.splice(index, 1);
-    },
-    toggleOneItem(todoItem, index) {
-      // App.vue 컴포넌트 내에서 수정하도록 메서드 구성
-      this.todoItems[index].completed = !this.todoItems[index].completed;
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
-    clearAllItem() {
-      // 내 생각
-      // this.todoItems.splice(0, this.todoItems.length);
-      // 캡틴판교 생각
-      // 복잡하게 생각할 것 없이 빈배열로 만들어주면 됨
-      this.todoItems = [];
-      localStorage.clear();
-    },
-  },
-  created() {
-    if (localStorage.length > 0) {
-      // 반복문은 let으로 값을 바꿔서 쓰니까
-      for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-          this.todoItems.push(
-            JSON.parse(localStorage.getItem(localStorage.key(i)))
-          );
-        }
-      }
-    }
   },
 };
 </script>
