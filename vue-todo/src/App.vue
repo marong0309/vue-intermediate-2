@@ -3,7 +3,7 @@
     <TodoHeader />
     <TodoInput />
     <TodoList />
-    <TodoFooter @clearAll="clearAllItem" />
+    <TodoFooter />
   </div>
 </template>
 <!-- v-on:하위 컴포넌트에서 발생시킨 이벤트 이름 = "현재 컴포넌트에서 발생시킨 이벤트" -->
