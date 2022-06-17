@@ -30,6 +30,10 @@
 export default {
   methods: {
     removeTodo(todoItem, index) {
+      // const obj = {
+      //   todoItem,
+      //   index
+      // }
       this.$store.commit("removeOneItem", { todoItem, index });
     },
     toggleComplete(todoItem, index) {

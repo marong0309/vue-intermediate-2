@@ -34,16 +34,15 @@ export const store = new Vuex.Store({
       localStorage.setItem(todoItem, JSON.stringify(obj));
       state.todoItems.push(obj);
     },
-    removeOneItem(state, { todoItem, index }){      
-      localStorage.removeItem(todoItem.item);     
-      state.todoItems.splice(index, 1);
+    removeOneItem(state, payload){      
+      localStorage.removeItem(payload.todoItem.item);     
+      state.todoItems.splice(payload.index, 1);
     },
-    toggleOneItem(state, { todoItem, index }) {
-      // App.vue 컴포넌트 내에서 수정하도록 메서드 구성
-      console.log(todoItem, index);
-      state.todoItems[index].completed = !state.todoItems[index].completed;
-      localStorage.removeItem(todoItem);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    toggleOneItem(state, payload) {
+      // App.vue 컴포넌트 내에서 수정하도록 메서드 구성      
+      state.todoItems[payload.index].completed = !state.todoItems[payload.index].completed;
+      localStorage.removeItem(payload.todoItem);
+      localStorage.setItem(payload.todoItem.item, JSON.stringify(payload.todoItem));
     },
     clearAllItem(state){
       state.todoItems = [];
