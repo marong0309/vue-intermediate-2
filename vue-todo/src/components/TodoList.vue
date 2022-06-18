@@ -2,7 +2,7 @@
   <div>
     <transition-group name="list" tag="ul">
       <li
-        v-for="(todoItem, index) in this.$store.state.todoItems"
+        v-for="(todoItem, index) in this.storedTodoItems"
         :key="todoItem.item"
         class="shadow"
       >
@@ -12,34 +12,41 @@
           :class="{
             checkBtnCompleted: todoItem.completed,
           }"
-          @click="toggleComplete(todoItem, index)"
+          @click="toggleComplete({todoItem, index})"
         />
         <span :class="{ textCompleted: todoItem.completed }">{{
           todoItem.item
         }}</span>
-        <span class="removeBtn" @click="removeTodo(todoItem, index)">
+        <span class="removeBtn" @click="removeTodo({todoItem, index})">
           <font-awesome-icon icon="fas fa-trash-alt" />
         </span>
-        <!-- <button @click="removeItem"></button> -->
       </li>
     </transition-group>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   methods: {
-    removeTodo(todoItem, index) {
-      // const obj = {
-      //   todoItem,
-      //   index
-      // }
-      this.$store.commit("removeOneItem", { todoItem, index });
-    },
-    toggleComplete(todoItem, index) {
-      this.$store.commit("toggleOneItem", { todoItem, index });
-    },
+    // helper함수에선 인자를 안넣어도 템플릿 내에 전달하는 인자를 전달해준다.
+    // 대신 인자가 여러개일 경우 템플릿 단에서 객체로 묶어서 전달해야한다.
+    ...mapMutations({
+      removeTodo: "removeOneItem",
+      toggleComplete: "toggleOneItem",
+    }),      
   },
+  computed:{
+    // todoItems(){
+    //   // return this.$store.getters.storedTodoItems      
+    // }
+    ...mapGetters(['storedTodoItems'])
+    // ...mapGetters 속성 이름 부여
+    // ...mapGetters(
+    //   {todoItems: 'storedTodoItems'}
+    // )
+  }
 };
 </script>
 

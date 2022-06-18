@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -12,9 +13,9 @@ export default {
     };
   },
   methods: {
-    clearTodo() {
-      this.$store.commit("clearAllItem");
-    },
+    ...mapMutations({
+      clearTodo: "clearAllItem"
+    })    
   },
 };
 </script>

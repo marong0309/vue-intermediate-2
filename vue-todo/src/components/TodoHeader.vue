@@ -2,14 +2,22 @@
   <!-- html -->
   <header>
     <h1>
-      {{ this.$store.state.headerText }}
+      {{ this.title }}
     </h1>
   </header>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   // js script
+  computed:{
+    ...mapState(
+      {
+        title: 'headerText'
+      }
+    )
+  }
 };
 </script>
 
