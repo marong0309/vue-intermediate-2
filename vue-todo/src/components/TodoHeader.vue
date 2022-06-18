@@ -2,22 +2,23 @@
   <!-- html -->
   <header>
     <h1>
-      {{ this.title }}
+      {{ this.$store.state.todoApp.headerText }}
+      <!-- state의 경우 데이터 값을 가져오는 방식이 다르다. -->
     </h1>
   </header>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+// import { mapState } from 'vuex';
 export default {
-  // js script
-  computed:{
-    ...mapState(
-      {
-        title: 'headerText'
-      }
-    )
-  }
+  // // js script
+  // computed:{
+  //   ...mapState(
+  //     {
+  //       title: 'headerText'
+  //     }
+  //   )
+  // }
 };
 </script>
 
